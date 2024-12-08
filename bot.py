@@ -27,7 +27,7 @@ condition = {
         latest ema ( latest close , 10 ) < latest ema ( latest close , 200 ) * 1.02 and
         market cap > 1000 and
         latest close > 1 day ago high
-    )))
+    ))))
     """
 }
 
@@ -112,7 +112,7 @@ def run_task():
             break
         data = fetch_data()
         send_to_telegram(data)
-        time.sleep(60)  # Wait for 60 seconds
+        time.sleep(60)  # Wait for 60 seconds before next update
 
 
 def listen_for_commands():
@@ -166,4 +166,5 @@ if __name__ == "__main__":
             print(f"Critical error: {str(e)}")
             time.sleep(10)
             print("Restarting bot...")
+
 
