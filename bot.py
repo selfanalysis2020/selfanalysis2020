@@ -58,7 +58,7 @@ def fetch_data():
                 # Format stock data
                 filtered_stock_list["nsecode"] = filtered_stock_list["nsecode"].str.slice(0, 8)
                 filtered_stock_list["volume"] = filtered_stock_list["volume"] / 100000
-                filtered_stock_list["per_chg"] = filtered_stock_list["per_chg"].apply(lambda x: f"{x:.1f}%")
+                filtered_stock_list["per_chg"] = filtered_stock_list["per_chg"].apply(lambda x: f"{x:.2f}%")
                 filtered_stock_list["volume"] = filtered_stock_list["volume"].apply(lambda x: f"{x:.1f}V")
 
                 filtered_stock_list.sort_values(by="per_chg", ascending=False, inplace=True)
@@ -108,7 +108,7 @@ def run_task():
     while is_running:
         if time.time() - start_time > 120:  # Check if 2 minutes have passed
             is_running = False
-            send_to_telegram("Stopped Fetching Restart.")
+            send_to_telegram("Bot has been automatically stopped after running for 2 minutes.")
             break
         data = fetch_data()
         send_to_telegram(data)
@@ -166,3 +166,4 @@ if __name__ == "__main__":
             print(f"Critical error: {str(e)}")
             time.sleep(10)
             print("Restarting bot...")
+
